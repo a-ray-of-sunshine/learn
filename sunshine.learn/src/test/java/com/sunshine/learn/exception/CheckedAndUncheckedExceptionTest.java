@@ -7,10 +7,10 @@ public class CheckedAndUncheckedExceptionTest {
 	@Test
 	public void exceptionTest(){
 		
-		// unchecked ÀàĞÍµÄÒì³£¿ÉÒÔ²»²¶»ñ£¬²»×öÈÎºÎ´¦Àí
+		// unchecked ç±»å‹çš„å¼‚å¸¸å¯ä»¥ä¸æ•è·ï¼Œä¸åšä»»ä½•å¤„ç†
 		CheckedAndUncheckedException.findUserName("hello");
 		
-		// checked ÀàĞÍµÄÒì³£±ØĞë²¶»ñ(try...catch)»òÕßÅ×³ö(throws)
+		// checked ç±»å‹çš„å¼‚å¸¸å¿…é¡»æ•è·(try...catch)æˆ–è€…æŠ›å‡º(throws)
 		try {
 			CheckedAndUncheckedException.findPassword("");
 		} catch (PasswordIsInvalid e) {

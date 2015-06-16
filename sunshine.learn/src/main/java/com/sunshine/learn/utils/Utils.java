@@ -3,13 +3,13 @@ package com.sunshine.learn.utils;
 import java.util.Random;
 
 /**
- * 2015Äê6ÔÂ16ÈÕ21:30:42
- * ¹¤¾ßÀà
+ * 2015å¹´6æœˆ16æ—¥21:30:42
+ * å·¥å…·ç±»
  */
 public class Utils {
 
 	/**
-	 * ´òÓ¡Êı×é
+	 * æ‰“å°æ•°ç»„
 	 * @param array
 	 */
 	public static void printArray(int[] array){
@@ -23,10 +23,10 @@ public class Utils {
 	}
 	
 	/**
-	 * Éú³ÉÊı×é ÊıÖµ·¶Î§ [start, end], ÔªËØ¸öÊı  count
-	 * @param start Êı×éµÄÊıÖµ·¶Î§
-	 * @param end   Êı×éµÄÊıÖµ·¶Î§
-	 * @param count Êı×éÔªËØµÄ¸öÊı
+	 * ç”Ÿæˆæ•°ç»„ æ•°å€¼èŒƒå›´ [start, end], å…ƒç´ ä¸ªæ•°  count
+	 * @param start æ•°ç»„çš„æ•°å€¼èŒƒå›´
+	 * @param end   æ•°ç»„çš„æ•°å€¼èŒƒå›´
+	 * @param count æ•°ç»„å…ƒç´ çš„ä¸ªæ•°
 	 */
 	public static int[] generateArray(int start, int end, int count){
 		int[] array = new int[count];

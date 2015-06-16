@@ -1,15 +1,15 @@
 package com.sunshine.learn.exception;
 
 /**
- * 2015Äê6ÔÂ16ÈÕ14:54:37
- * checked ºÍ unchecked Òì³£
+ * 2015å¹´6æœˆ16æ—¥14:54:37
+ * checked å’Œ unchecked å¼‚å¸¸
  */
 public class CheckedAndUncheckedException {
 
 	public static String findUserName(String params){
 		
 		if(null == params || "".equals(params)){
-			throw new UserNameIsInvalid("²ÎÊıÎŞ:-D");
+			throw new UserNameIsInvalid("æ— å‚æ•°:-D");
 		}
 		
 		return "username";
@@ -18,7 +18,7 @@ public class CheckedAndUncheckedException {
 	public static String findPassword(String params) throws PasswordIsInvalid{
 		
 		if(null == params || "".equals(params)){
-			throw new PasswordIsInvalid("²ÎÊıÎŞ:-D");
+			throw new PasswordIsInvalid("æ— å‚æ•°:-D");
 		}
 		
 		return "password";
@@ -26,8 +26,8 @@ public class CheckedAndUncheckedException {
 }
 
 /**
- * ¼Ì³Ğ×Ô java.lang.Exception 
- * ÊÇ checkedµÄÒì³£
+ * ç»§æ‰¿è‡ª java.lang.Exception 
+ * æ˜¯ checkedçš„å¼‚å¸¸
  *
  */
 @SuppressWarnings("serial")
@@ -38,8 +38,8 @@ class PasswordIsInvalid extends Exception{
 }
 
 /**
- * ¼Ì³Ğ×Ô java.lang.RuntimeException
- * ÊÇ unchecked µÄÒì³£
+ * ç»§æ‰¿è‡ª java.lang.RuntimeException
+ * æ˜¯ unchecked çš„å¼‚å¸¸
  */
 @SuppressWarnings("serial")
 class UserNameIsInvalid extends RuntimeException{

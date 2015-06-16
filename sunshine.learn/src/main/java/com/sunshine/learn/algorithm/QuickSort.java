@@ -1,8 +1,8 @@
 package com.sunshine.learn.algorithm;
 
 /**
- * 2015Äê6ÔÂ16ÈÕ20:34:46
- * ¿ìËÙÅÅĞò
+ * 2015å¹´6æœˆ16æ—¥20:34:46
+ * å¿«é€Ÿæ’åº
  */
 public class QuickSort {
 
@@ -15,16 +15,16 @@ public class QuickSort {
 	}
 	
 	/**
-	 * ¶ÔÊı×é array ½øĞĞ»®·Ö
+	 * å¯¹æ•°ç»„ array è¿›è¡Œåˆ’åˆ†
 	 * @param array
-	 * @param q ÆğÊ¼Ë÷Òı
-	 * @param r ÖÕÖ¹Ë÷Òı
+	 * @param q èµ·å§‹ç´¢å¼•
+	 * @param r ç»ˆæ­¢ç´¢å¼•
 	 * @return
 	 */
 	public int divide(int[] array, int q, int r){
 		int minIndex = q - 1;
 		
-		// È¡×îºóÒ»¸öÔªËØÎªÖ÷Ôª
+		// å–æœ€åä¸€ä¸ªå…ƒç´ ä¸ºä¸»å…ƒ
 		int pivot = array[r];
 		
 		for(int maxIndex = q; maxIndex < r; maxIndex++){
