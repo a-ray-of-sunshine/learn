@@ -6,7 +6,13 @@ package com.sunshine.learn.algorithm;
  */
 public class QuickSort {
 
-	
+	public void quickSort(int[] array, int q, int r){
+		if(q < r){
+			int pivotIndex = this.divide(array, q, r);
+			quickSort(array, q, pivotIndex - 1);
+			quickSort(array, pivotIndex + 1, r);
+		}
+	}
 	
 	/**
 	 * 对数组 array 进行划分
@@ -16,7 +22,7 @@ public class QuickSort {
 	 * @return
 	 */
 	public int divide(int[] array, int q, int r){
-		int minIndex = -1;
+		int minIndex = q - 1;
 		
 		// 取最后一个元素为主元
 		int pivot = array[r];
