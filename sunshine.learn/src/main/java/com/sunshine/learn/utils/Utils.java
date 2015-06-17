@@ -38,4 +38,17 @@ public class Utils {
 		
 		return array;
 	}
+	
+	/**
+	 * 交换数组中的两个元素
+	 * @param array
+	 * @param minIndex
+	 * @param maxIndex
+	 */
+	public static void exchangeElement(int[] array, int minIndex, int maxIndex){
+		int temp = 0;
+		temp = array[minIndex];
+		array[minIndex] = array[maxIndex];
+		array[maxIndex] = temp;
+	}
 }
