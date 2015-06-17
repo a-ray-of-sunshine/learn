@@ -15,11 +15,9 @@ public class InsertSort {
 		while(i < size){
 			int j = i - 1;
 			int key = array[i];
-			while(j >= 0){
-				if(key < array[j]){
-					Utils.exchangeElement(array, j, j+1);
-					key = array[j];
-				}
+			while(j >= 0 && key < array[j]){
+				Utils.exchangeElement(array, j, j+1);
+				key = array[j];
 				j--;
 			}
 			i++;
