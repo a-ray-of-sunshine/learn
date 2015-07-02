@@ -87,7 +87,11 @@ public class LSP {
 		}
 	}
 	
-	// 调整矩形的宽度使其始终大于高度
+	/**
+	 * 调整矩形的宽度使其始终大于高度
+	 * 这个方法的作用是调整矩形的宽度，而不是正方形的，所以在第二种继承形式下，下面的代码始终是可以运行的
+	 * @param rec
+	 */
 	static void resizeRec2(Rectangle2 rec)
 	{
 		while(rec.getWidth()<=rec.getHeight())
