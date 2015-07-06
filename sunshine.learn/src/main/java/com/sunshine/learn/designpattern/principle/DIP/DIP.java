@@ -38,6 +38,7 @@ package com.sunshine.learn.designpattern.principle.DIP;
  */
 public class DIP {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// 妈妈讲故事
 		// 1. 买本书
