@@ -14,8 +14,10 @@ public class AtomicIntegerTest {
 	@Test
 	public void testInc() throws InterruptedException{
 	
-		// 逐步增大  testCount 的值 assert 失败越快
-		int testCount = 15;
+		// 逐步增大  testCount 的值 assert 失败越快.
+		// NumberHolder 的 value 改由 AtomicInteger 实现
+		// 无论将 testCount 增大在多少，都不会失败 , AtomicInteger 实现了原子操作
+		int testCount = 500;
 		for(int i = 0; i < testCount; i++){
 			assertEquals(true, this.testint());
 		}
@@ -98,19 +100,21 @@ public class AtomicIntegerTest {
 
 class NumberHolder{
 
-	// volatile 内存可见性，和同步是完全不同的
-	// volatile 可以保证可见性，但仍不能使得 value++ 成为原子操作
-	private volatile int  value;
+	private AtomicInteger value;
+
+	public NumberHolder(){
+		this.value = new AtomicInteger();
+	}
 
 	public int getValue() {
-		return value;
+		return value.get();
 	}
 
 	public void setValue(int value) {
-		this.value = value;
+		this.value.set(value);
 	}
 
 	public void incValue(){
-		this.value++;
+		this.value.incrementAndGet();
 	}
 }
