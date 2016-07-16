@@ -70,7 +70,13 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void start(Thread... threads){
+		for(Thread t: threads){
+			t.start();
+		}
+	}	
+
 	public static int randInt(int top){
 		Random rand = new Random();
 		return rand.nextInt(top);
