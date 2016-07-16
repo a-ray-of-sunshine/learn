@@ -11,7 +11,8 @@ public class MessageProcessSystem {
 	public void testSystem(){
 		
 		for(int i = 0; i < 100; i++){
-			this.messageProcess();
+			// this.messageProcess();
+			this.messageProcessSync();
 			System.out.println("第" + i + "测试成功.");
 		}
 	}
@@ -32,6 +33,36 @@ public class MessageProcessSystem {
 
 		Produce produce = new Produce(count, produceCount);
 		Consumer consumer = new Consumer(count, consumerCount);
+		
+		Thread pt = new Thread(produce);
+		Thread ct = new Thread(consumer);
+		
+		pt.start();
+		ct.start();
+		
+		Utils.join(pt, ct);	
+		
+		Assert.assertEquals(produceCount - consumerCount, count.getCount());
+	}
+	
+	private void messageProcessSync(){
+
+		// 0. MessageCount类没有任何同步处理，
+		// ProduceSync 和 ConsumerSync 分别进行了同步处理，所以
+		// 使用 MessageCount 计数，也不会出现并发问题了。
+		ICount count = new MessageCount();
+		
+		// 1. 使用 synchronized
+		// ICount count = new MessageCountSync();
+		
+		// 2. 使用 Atomic 变量，不需要同步
+		// ICount count = new MessageCountAtomic();
+
+		int produceCount = Utils.randInt(100);
+		int consumerCount = Utils.randInt(produceCount + 1);
+
+		ProduceSync produce = new ProduceSync(count, produceCount);
+		ConsumerSync consumer = new ConsumerSync(count, consumerCount);
 		
 		Thread pt = new Thread(produce);
 		Thread ct = new Thread(consumer);
@@ -80,6 +111,51 @@ class Consumer implements Runnable{
 
 		for(int i = 0; i < this.consumerCount; i++){
 			this.count.decCount();
+			Utils.sleep(10);
+		}
+	}
+	
+}
+
+class ProduceSync implements Runnable {
+	
+	private ICount count;
+	private int produceCount;
+
+	public ProduceSync(ICount count, int produceCount) {
+		this.count = count;
+		this.produceCount = produceCount;
+	}
+
+	@Override
+	public void run() {
+		
+		for(int i = 0; i < this.produceCount; i++){
+			synchronized (count) {
+				this.count.incCount();
+			}
+			Utils.sleep(5);
+		}
+	}
+}
+
+class ConsumerSync implements Runnable{
+
+	private ICount count;
+	private int consumerCount;
+
+	public ConsumerSync(ICount count, int consumerCount) {
+		this.count = count;
+		this.consumerCount = consumerCount;
+	}
+
+	@Override
+	public void run() {
+
+		for(int i = 0; i < this.consumerCount; i++){
+			synchronized (count) {
+				this.count.decCount();
+			}
 			Utils.sleep(10);
 		}
 	}

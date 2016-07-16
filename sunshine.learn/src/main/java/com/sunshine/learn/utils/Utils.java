@@ -51,4 +51,28 @@ public class Utils {
 		array[minIndex] = array[maxIndex];
 		array[maxIndex] = temp;
 	}
+	
+	public static void sleep(long millis){
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void join(Thread... threads){
+		try {
+			for(Thread t: threads){
+				t.join();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static int randInt(int top){
+		Random rand = new Random();
+		return rand.nextInt(top);
+	}
 }
