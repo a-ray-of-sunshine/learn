@@ -3,6 +3,7 @@ package com.sunshine.learn.thread.atomic;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.sunshine.learn.thread.lock.AtomicIntegerWithLock;
 import com.sunshine.learn.utils.Utils;
 
 public class MessageProcessSystem {
@@ -11,8 +12,8 @@ public class MessageProcessSystem {
 	public void testSystem(){
 		
 		for(int i = 0; i < 100; i++){
-			// this.messageProcess();
-			this.messageProcessSync();
+			this.messageProcess();
+			// this.messageProcessSync();
 			System.out.println("第" + i + "测试成功.");
 		}
 	}
@@ -27,6 +28,9 @@ public class MessageProcessSystem {
 		
 		// 2. 使用 Atomic 变量，不需要同步
 		// ICount count = new MessageCountAtomic();
+		
+		// 3. 使用 Lock 进行同步
+		// ICount count = new AtomicIntegerWithLock();
 
 		int produceCount = Utils.randInt(100);
 		int consumerCount = Utils.randInt(produceCount + 1);
@@ -50,13 +54,13 @@ public class MessageProcessSystem {
 		// 0. MessageCount类没有任何同步处理，
 		// ProduceSync 和 ConsumerSync 分别进行了同步处理，所以
 		// 使用 MessageCount 计数，也不会出现并发问题了。
-		ICount count = new MessageCount();
+		// ICount count = new MessageCount();
 		
 		// 1. 使用 synchronized
 		// ICount count = new MessageCountSync();
 		
 		// 2. 使用 Atomic 变量，不需要同步
-		// ICount count = new MessageCountAtomic();
+		ICount count = new MessageCountAtomic();
 
 		int produceCount = Utils.randInt(100);
 		int consumerCount = Utils.randInt(produceCount + 1);
