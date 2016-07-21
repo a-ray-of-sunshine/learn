@@ -64,10 +64,18 @@ public class MCSLock implements ILock {
 		// 2. 有后继结点，通知后继结点，可以获得锁了
 		qnode.next.locked = false; 
 
+
 		// !!!!!!! important !!!!!!
-		// 重置 qnode 的 next 值
+		// 下面的代码有两个作用：
+		
+		// 0. 重置 qnode 的 next 值
 		// 此时 myNode 又恢复到未获取到锁的状态
 		// myNode 就是可以重新被当前线程在第二次获取锁的时候使用了
+
+		// 1. help for GC
+		// java里面对象，都会维持引用计数，所以，这里  qnode.next = null, 将不会导致（肯定不会导致）qnode.next 结点 的内存被收回
+		// 只是将 qnode.next 内存区域的引用 减小 1， 而 qnode.next 指向的结点还在其 qnode.next.locked 上自旋，
+		// 所以 qnode.next = null, 不会导致 next 结点的内存被回收
 		qnode.next = null;
 	}
 
