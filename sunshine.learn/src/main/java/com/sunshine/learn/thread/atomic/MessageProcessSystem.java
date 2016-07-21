@@ -2,8 +2,10 @@ package com.sunshine.learn.thread.atomic;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-import com.sunshine.learn.thread.lock.AtomicIntegerWithLock;
+import com.sunshine.learn.thread.lock.MessageCountCLHLock;
+import com.sunshine.learn.thread.lock.MessageCountTicketLock;
 import com.sunshine.learn.utils.Utils;
 
 public class MessageProcessSystem {
@@ -11,17 +13,20 @@ public class MessageProcessSystem {
 	@Test
 	public void testSystem(){
 		
+		long start = System.currentTimeMillis();
 		for(int i = 0; i < 100; i++){
 			this.messageProcess();
 			// this.messageProcessSync();
 			System.out.println("第" + i + "测试成功.");
 		}
+		long end = System.currentTimeMillis();
+		System.out.println("总共用时：" + (end - start) / 1000 + " 秒.");
 	}
 	
 	private void messageProcess(){
 
 		// 0. MessageCount类没有任何同步处理，下面的 assert 有可能失败
-		ICount count = new MessageCount();
+		// ICount count = new MessageCount();
 		
 		// 1. 使用 synchronized
 		// ICount count = new MessageCountSync();
@@ -31,6 +36,15 @@ public class MessageProcessSystem {
 		
 		// 3. 使用 Lock 进行同步
 		// ICount count = new AtomicIntegerWithLock();
+		
+		// 4. 使用 自旋锁
+		// ICount count = new MessageCountSpinLock();
+		
+		// 5. 使用公平的自旋锁
+		// ICount count = new MessageCountTicketLock();
+		
+		// 6. 使用 CLH 锁
+		ICount count = new MessageCountCLHLock();
 
 		int produceCount = Utils.randInt(100);
 		int consumerCount = Utils.randInt(produceCount + 1);
