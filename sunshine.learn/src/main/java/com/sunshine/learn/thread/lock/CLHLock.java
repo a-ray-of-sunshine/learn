@@ -3,8 +3,13 @@ package com.sunshine.learn.thread.lock;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 保证了 FIFO
- * @author Administrator
+ *    CLH算法将多个线程的自旋分散在不同的节点进行，当一个线程释放锁时，只会将其后继结点的cache失效掉，
+ *    对于其他线程没有任何影响，其他线程还是在各自的cache中进行局部自旋。这样，就大大减少了bus上的交通阻塞，不会导致锁的释放被延迟。
+       另外，CLH算法由于总是将最近一个申请锁的线程放在链表的最后，从而带来了一个附加的功能，那就是对锁竞争的公平性，保证了先申请锁的线程先得到锁。
+       而且，CHL算法也是空间有效的，对于N个线程，L个锁，如果每个线程每次最多只能获取一个锁，则需要的存储空间是O（N+L），其中N个线程对应N个myNode，L个锁对应L个tail。
+       当然，CLH算法也有一个缺点，在cache-less的NUMA架构体系下，因为每个线程自旋的是其前驱线程的QNode中的locked域，如果内存位置比较远，则性能是要打折扣的。
+       
+       参考： [CLH锁](http://xw-z1985.iteye.com/blog/2064372)
  *
  */
 public class CLHLock implements ILock {
