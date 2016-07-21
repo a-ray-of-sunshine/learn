@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import com.sunshine.learn.thread.lock.MessageCountCLHLock;
+import com.sunshine.learn.thread.lock.MessageCountMCSLock;
 import com.sunshine.learn.thread.lock.MessageCountTicketLock;
 import com.sunshine.learn.utils.Utils;
 
@@ -44,7 +45,10 @@ public class MessageProcessSystem {
 		// ICount count = new MessageCountTicketLock();
 		
 		// 6. 使用 CLH 锁
-		ICount count = new MessageCountCLHLock();
+		// ICount count = new MessageCountCLHLock();
+		
+		// 7. 使用 MCS 锁
+		ICount count = new MessageCountMCSLock();
 
 		int produceCount = Utils.randInt(100);
 		int consumerCount = Utils.randInt(produceCount + 1);
