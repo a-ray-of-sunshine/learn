@@ -76,6 +76,7 @@ class PoolManager{
 
 	public Resouce getResource(){
 		try {
+			System.out.println(lock.getQueueLength() + " 个线程等待，获取资源.");
 			lock.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -102,6 +103,7 @@ class PoolManager{
 }
 
 class Resouce{
+	// 标识，资源是否被占用
 	private boolean isLock;
 	private int index;
 
