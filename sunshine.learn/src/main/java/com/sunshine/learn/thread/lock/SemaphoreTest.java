@@ -2,12 +2,57 @@ package com.sunshine.learn.thread.lock;
 
 import java.util.concurrent.Semaphore;
 
+import com.sunshine.learn.utils.Utils;
+
 public class SemaphoreTest {
 	
+	public static void main(String[] args) {
+		
+		int clientSize = 10;
+		int poolSize = 3;
+		
+		PoolManager pool = new PoolManager(poolSize);
+		
+		for(int i = 0; i < clientSize; i++){
+			Runnable task = new Client(pool);
+			new Thread(task).start();
+		}
+		
+	}
 
 }
 
-// 资源池
+/**
+ * 客户端，使用资源池来获取资源
+ */
+class Client implements Runnable {
+
+	private PoolManager pool;
+	
+	public Client(PoolManager pool) {
+		this.pool = pool;
+	}
+
+	@Override
+	public void run() {
+
+		Utils.sleep(Utils.randInt(1000));
+
+		// 使用资源
+		Resouce resource = pool.getResource();
+		System.out.println(Thread.currentThread().getName() + " 正在使用资源：" + resource.getIndex());
+		Utils.sleep(Utils.randInt(2000));
+
+		// 释放资源
+		pool.putResource(resource);
+		Utils.sleep(Utils.randInt(500));
+	}
+}
+
+// 资源池, 使用信号量来自管理有限的资源
+// 只要内部 信号量 的 permits >= 资源的个数
+// 则 findResource 方法总是可以找到，有效的可用的资源
+// 而不会直接返回 null.
 class PoolManager{
 	
 	private int poolSize;
