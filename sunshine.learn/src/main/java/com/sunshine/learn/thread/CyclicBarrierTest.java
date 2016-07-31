@@ -28,6 +28,9 @@ public class CyclicBarrierTest {
 						System.out.println("线程" + Thread.currentThread().getName() + "即将到达集合地点1，当前已有"
 								+ cb.getNumberWaiting() + "个已经到达，正在等候");
 						cb.await();// 到此如果没有达到公共屏障点，则该线程处于等待状态，如果达到公共屏障点则所有处于等待的线程都继续往下运行
+						
+						// 3线程到达 common barrier point 后
+						// cb的内部状态被重置, 所以下面就可以使用继续使用了
 
 						Thread.sleep((long) (Math.random() * 10000));
 						System.out.println("线程" + Thread.currentThread().getName() + "即将到达集合地点2，当前已有"
