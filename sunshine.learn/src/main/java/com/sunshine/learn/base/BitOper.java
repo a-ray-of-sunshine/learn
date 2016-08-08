@@ -31,7 +31,7 @@ public class BitOper {
 
     static boolean isFulfilling(int m) { return (m & FULFILLING) != 0; }
  
-    @Test
+    // @Test
     public void test1(){
     	
     	System.out.println(isFulfilling(REQUEST)); // false
@@ -44,5 +44,12 @@ public class BitOper {
     	System.out.println(FULFILLING | REQUEST); // 2
     	System.out.println(FULFILLING | DATA); // 3
     	System.out.println(FULFILLING | FULFILLING); // 2
+    }
+    
+    @Test
+    public void test2(){
+    	int a = 3;
+    	System.out.println( a != (a = 1));
+    	System.out.println(a);
     }
 }
