@@ -25,8 +25,11 @@ public class StreamTokenizerTest {
 	private static void ResolveFunc(StreamTokenizer st) throws IOException{
 		
 		Deque<String> tokenStack = new LinkedList<String>();
+		Deque<String> tokenStack1 = new LinkedList<String>();
 		Deque<String> funcStack = new LinkedList<String>();
 		
+		
+		// 构建符号表
 		int ttype;
 		while(StreamTokenizer.TT_EOF != (ttype = st.nextToken())){
 			
@@ -47,11 +50,24 @@ public class StreamTokenizerTest {
 					System.out.print((char)ttype);
 			}
 			
-			tokenStack.push(tokenStr);
+			tokenStack.offer(tokenStr);
 			System.out.println(": " + st);
 		}	
 		
 		System.out.println(tokenStack);
+		
+		// 使用符号表解析
+		String token = "";
+		while(null != (token = tokenStack.poll())){
+
+			if("(".equals(token)){
+				
+				System.out.println("func name: " + tokenStack1.pop());
+				
+			}
+			
+			tokenStack1.push(token);
+		}
 	}
 	
 	private static void ResolveToken(StreamTokenizer st) throws IOException{
@@ -80,7 +96,7 @@ public class StreamTokenizerTest {
 		sb.append('\n');
 		sb.append("{");
 		sb.append('\n');
-		sb.append("printf('hello,world');");
+		sb.append("printf('hello world');");
 		sb.append('\n');
 		sb.append("}");
 		
