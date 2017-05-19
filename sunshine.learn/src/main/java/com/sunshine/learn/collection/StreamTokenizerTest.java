@@ -3,11 +3,10 @@ package com.sunshine.learn.collection;
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.List;
 
 public class StreamTokenizerTest {
 	
@@ -20,14 +19,20 @@ public class StreamTokenizerTest {
 		// ResolveToken(st);
 		ResolveFunc(st);
 
+		// WindowsNativeDispatcher
+		// FileInputStream
+		// JavaLangAccess
+		// Thread
+		// FileChannel
+		// Unsafe
+		// DirectByteBuffer
+		// ByteBuffer
 	}
 	
 	private static void ResolveFunc(StreamTokenizer st) throws IOException{
 		
 		Deque<String> tokenStack = new LinkedList<String>();
 		Deque<String> tokenStack1 = new LinkedList<String>();
-		Deque<String> funcStack = new LinkedList<String>();
-		
 		
 		// 构建符号表
 		int ttype;
@@ -58,18 +63,24 @@ public class StreamTokenizerTest {
 		
 		// 使用符号表解析
 		String token = "";
-		while(null != (token = tokenStack.poll())){
-
-			if("(".equals(token)){
-				
-				System.out.println("func name: " + tokenStack1.pop());
-				
+		List<String> list = new ArrayList<String>(tokenStack);
+		for(int i = 0; i < list.size(); i++){
+			token = list.get(i);
+			if("(".equals(token) && 0 != i){
+				tokenStack1.offer(list.get(i - 1));
+				tokenStack1.offer(token);
 			}
 			
-			tokenStack1.push(token);
+			if(")".equals(token) || "{".equals(token)){
+				tokenStack1.offer(token);
+			}
 		}
+		
+		System.out.println(tokenStack1);
+
 	}
 	
+	@SuppressWarnings("unused")
 	private static void ResolveToken(StreamTokenizer st) throws IOException{
 		int ttype;
 		while(StreamTokenizer.TT_EOF != (ttype = st.nextToken())){
@@ -92,7 +103,7 @@ public class StreamTokenizerTest {
 	private static String getStr(){
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("int main()");
+		sb.append("int main(int args)");
 		sb.append('\n');
 		sb.append("{");
 		sb.append('\n');
