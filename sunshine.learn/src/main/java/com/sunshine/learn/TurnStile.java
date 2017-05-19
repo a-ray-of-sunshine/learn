@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+// https://en.wikipedia.org/wiki/Finite-state_machine
+// 参考 FSM 
 public class TurnStile {
 	
 	public static void main(String[] args) {
