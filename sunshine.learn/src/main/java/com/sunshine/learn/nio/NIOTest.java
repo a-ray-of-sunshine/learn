@@ -1,4 +1,4 @@
-﻿package com.sunshine.learn.nio;
+package com.sunshine.learn.nio;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

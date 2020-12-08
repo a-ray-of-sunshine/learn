@@ -1,4 +1,4 @@
-﻿package com.sunshine.learn.nio;
+package com.sunshine.learn.nio;
 
 import java.io.BufferedReader;
 import java.io.File;
