@@ -4,8 +4,39 @@ import lombok.SneakyThrows;
 
 public class SuspendThread {
 
-  @SneakyThrows
   public static void main(String[] args) {
+
+    // testBad();
+
+    testGood();
+
+  }
+
+  @SneakyThrows
+  private static void testGood(){
+
+    Object lock = new Object();
+
+    GoodSuspend good1 = new GoodSuspend("good1", lock);
+    GoodSuspend good2 = new GoodSuspend("good2", lock);
+
+    good1.start();
+    good2.start();
+
+    Thread.sleep(1000);
+
+    // 挂起线程1
+    good1.suspendMe();
+
+    // 10秒之后唤醒线程1, 之后 线程1 参与到后面的调度中
+    Thread.sleep(10000);
+    good1.resumeMe();
+
+  }
+
+
+  @SneakyThrows
+  private static void testBad(){
 
     Object lock = new Object();
 
@@ -42,5 +73,54 @@ class BadSuspend extends Thread {
       suspend();
     }
 
+  }
+}
+
+class GoodSuspend extends Thread {
+
+  private Object lock;
+  private volatile boolean supendme = false;
+
+  public GoodSuspend(String name, Object lock) {
+    super(name);
+    this.lock = lock;
+  }
+
+  public void suspendMe() {
+    supendme = true;
+  }
+
+  public void resumeMe() {
+    this.supendme = false;
+    synchronized (this) {
+      this.notify();
+    }
+  }
+
+  @SneakyThrows
+  @Override
+  public void run() {
+    while (true){
+
+      synchronized (this){
+        while (supendme){
+          try {
+            System.out.println(getName() + ": i'm suspend");
+            wait();
+            System.out.println(getName() + ": i'm resume");
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
+      synchronized (lock){
+        Thread.sleep(2000);
+        System.out.println(getName() + ": in GoodSuspend Thread");
+      }
+
+      yield();
+
+    }
   }
 }
