@@ -1,9 +1,9 @@
 package com.sunshine.learn.thread.atomic;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class AtomicIntegerTest {
 
@@ -15,11 +15,14 @@ public class AtomicIntegerTest {
 	public void testInc() throws InterruptedException{
 	
 		// 逐步增大  testCount 的值 assert 失败越快.
-		// NumberHolder 的 value 改由 AtomicInteger 实现
+		// AtomicNumberHolder 的 value 改由 AtomicInteger 实现
 		// 无论将 testCount 增大在多少，都不会失败 , AtomicInteger 实现了原子操作
 		int testCount = 500;
 		for(int i = 0; i < testCount; i++){
-			assertEquals(true, this.testint());
+			// NumberHolder count = new AtomicNumberHolder();
+			// NativeNumberHolder 实现中使用i++线程不安全
+			NumberHolder count = new NativeNumberHolder();
+			this.testint(count);
 		}
 
 	}
@@ -28,10 +31,10 @@ public class AtomicIntegerTest {
 	 * 启动 threadSize 个线程，对 整数 value 进行 value++ 操作
 	 * @return
 	 * @throws InterruptedException
+	 * @param count
 	 */
-	public boolean testint() throws InterruptedException{
+	public boolean testint(NumberHolder count) throws InterruptedException{
 		
-		final NumberHolder count = new NumberHolder(); 
 		count.setValue(0);
 		
 		final int threadSize = 100;
@@ -98,23 +101,46 @@ public class AtomicIntegerTest {
 	}
 }
 
-class NumberHolder{
+class AtomicNumberHolder implements NumberHolder {
 
 	private AtomicInteger value;
 
-	public NumberHolder(){
+	public AtomicNumberHolder(){
 		this.value = new AtomicInteger();
 	}
 
+	@Override
 	public int getValue() {
 		return value.get();
 	}
 
+	@Override
 	public void setValue(int value) {
 		this.value.set(value);
 	}
 
+	@Override
 	public void incValue(){
 		this.value.incrementAndGet();
+	}
+}
+
+class NativeNumberHolder implements NumberHolder {
+
+	private int value;
+
+	@Override
+	public int getValue() {
+		return 0;
+	}
+
+	@Override
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	@Override
+	public void incValue() {
+		value++;
 	}
 }
