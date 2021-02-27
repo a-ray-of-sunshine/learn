@@ -1,8 +1,5 @@
 package com.sunshine.learn.thread;
 
-import lombok.SneakyThrows;
-import org.springframework.context.annotation.Primary;
-
 public class InterruptThread {
 
 
