@@ -1,5 +1,6 @@
 package com.sunshine.learn.web.spring.controller;
 
+import com.sunshine.learn.web.spring.service.HelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,10 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @RequestMapping("/")
-    String home() {
-        log.info("Hello World!");
-        return "Hello World!";
-    }
+  private HelloService helloService;
+
+  public HelloController(HelloService helloService) {
+    this.helloService = helloService;
+  }
+
+  @RequestMapping("/")
+  public String home() {
+    log.info("Hello World!");
+    return helloService.welcome("World");
+  }
 
 }
