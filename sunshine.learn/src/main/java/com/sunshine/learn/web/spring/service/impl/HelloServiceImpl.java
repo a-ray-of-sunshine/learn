@@ -10,7 +10,6 @@ public class HelloServiceImpl implements HelloService {
 
   @Override
   public String welcome(String name) {
-    log.info("name: " + name);
     return "Hello " + name;
   }
 }
