@@ -17,7 +17,6 @@ public class HelloController {
 
   @RequestMapping("/")
   public String home() {
-    log.info("Hello World!");
     return helloService.welcome("World");
   }
 

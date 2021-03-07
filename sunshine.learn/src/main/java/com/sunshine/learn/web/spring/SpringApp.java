@@ -17,6 +17,6 @@ public class SpringApp {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringApp.class, args);
         HelloController helloController = context.getBean("helloController", HelloController.class);
-        helloController.home();
+        // helloController.home();
     }
 }

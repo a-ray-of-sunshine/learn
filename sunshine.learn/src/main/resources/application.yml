@@ -1,5 +1,10 @@
 server:
   tomcat:
-    threads:
-      min-spare: 3
+    min-spare-threads: 3
   port: 80
+
+spring:
+  redis:
+    host: 192.168.10.111
+    port: 7001
+    password: 123456
