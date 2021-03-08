@@ -1,0 +1,2 @@
+org.springframework.boot.SpringApplicationRunListener=\
+com.sunshine.learn.web.spring.conf.ApplicationTraceRunListener

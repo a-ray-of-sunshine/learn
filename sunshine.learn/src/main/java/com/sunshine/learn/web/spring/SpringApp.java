@@ -11,13 +11,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class SpringApp {
 
-    public SpringApp() {
-        log.info("app init");
-    }
+  public SpringApp() {
+    log.info("app init");
+  }
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(SpringApp.class, args);
-        HelloController helloController = context.getBean("helloController", HelloController.class);
-        Assert.assertNotNull(helloController);
-    }
+  public static void main(String[] args) {
+    ConfigurableApplicationContext context = SpringApplication.run(SpringApp.class, args);
+    HelloController helloController = context.getBean("helloController", HelloController.class);
+    Assert.assertNotNull(helloController);
+  }
 }
