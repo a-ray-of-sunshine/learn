@@ -17,7 +17,7 @@ public class SpringApp {
 
   public static void main(String[] args) {
     ConfigurableApplicationContext context = SpringApplication.run(SpringApp.class, args);
-    HelloController helloController = context.getBean("helloController", HelloController.class);
+    HelloController helloController = context.getBean(HelloController.class);
     Assert.assertNotNull(helloController);
   }
 }
