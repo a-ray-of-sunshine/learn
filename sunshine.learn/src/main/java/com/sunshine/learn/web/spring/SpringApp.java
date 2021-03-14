@@ -7,20 +7,22 @@ import org.junit.Assert;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Slf4j
+@EnableAspectJAutoProxy
 @SpringBootApplication
 public class SpringApp {
 
-  public SpringApp() {
-    log.info("app init");
-  }
+    public SpringApp() {
+        log.info("app init");
+    }
 
-  public static void main(String[] args) {
-    SpringApplication application = new SpringApplication(SpringApp.class);
-    application.addInitializers(new MyApplicationContextInitializer());
-    ConfigurableApplicationContext context = application.run(args);
-    HelloController helloController = context.getBean("helloController", HelloController.class);
-    Assert.assertNotNull(helloController);
-  }
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(SpringApp.class);
+        application.addInitializers(new MyApplicationContextInitializer());
+        ConfigurableApplicationContext context = application.run(args);
+        HelloController helloController = context.getBean("helloController", HelloController.class);
+        Assert.assertNotNull(helloController);
+    }
 }
