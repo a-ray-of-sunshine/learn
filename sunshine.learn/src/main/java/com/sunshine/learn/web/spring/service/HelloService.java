@@ -4,4 +4,8 @@ public interface HelloService {
 
   String welcome(String name);
 
+  void helloRedis();
+
+  void helloMySQL();
+
 }

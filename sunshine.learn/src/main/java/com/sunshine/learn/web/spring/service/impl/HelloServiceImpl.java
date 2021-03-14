@@ -1,13 +1,14 @@
 package com.sunshine.learn.web.spring.service.impl;
 
 import com.sunshine.learn.web.spring.service.HelloService;
-import java.util.List;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -21,18 +22,18 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public String welcome(String name) {
-        helloRedis();
-        helloMySql();
         return "Hello " + name;
     }
 
-    private void helloMySql() {
+    @Override
+    public void helloMySQL() {
         String sql = "select * from person";
         List<Map<String, Object>> data = jdbcTemplate.queryForList(sql);
         System.out.println(data);
     }
 
-    private void helloRedis() {
+    @Override
+    public void helloRedis() {
         String k1 = redisTemplate.opsForValue().get("k1");
         redisTemplate.opsForValue().set("k2", "Hello Redis");
         String k11 = redisTemplate.opsForValue().get("k2");
