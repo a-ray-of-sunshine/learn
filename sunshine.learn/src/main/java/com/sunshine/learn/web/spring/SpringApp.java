@@ -1,5 +1,6 @@
 package com.sunshine.learn.web.spring;
 
+import com.sunshine.learn.web.spring.conf.MyApplicationContextInitializer;
 import com.sunshine.learn.web.spring.controller.HelloController;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -16,7 +17,9 @@ public class SpringApp {
   }
 
   public static void main(String[] args) {
-    ConfigurableApplicationContext context = SpringApplication.run(SpringApp.class, args);
+    SpringApplication application = new SpringApplication(SpringApp.class);
+    application.addInitializers(new MyApplicationContextInitializer());
+    ConfigurableApplicationContext context = application.run(args);
     HelloController helloController = context.getBean("helloController", HelloController.class);
     Assert.assertNotNull(helloController);
   }
