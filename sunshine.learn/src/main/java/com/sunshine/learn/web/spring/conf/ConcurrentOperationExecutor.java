@@ -21,7 +21,7 @@ public class ConcurrentOperationExecutor implements Ordered {
     return 0;
   }
 
-  @Pointcut("execution(* com.sunshine.learn.web.spring.service..*.*(..))")
+  @Pointcut("execution(* com.sunshine.learn.web.spring.service.impl.HelloServiceImpl.*(..))")
   public void statOperation() {
   }
 
