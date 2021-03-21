@@ -31,4 +31,9 @@ public class HelloController {
         return "success";
     }
 
+    @RequestMapping("/tx1")
+    public String tx1() {
+        txService.txMethod();
+        return "success";
+    }
 }

@@ -4,4 +4,6 @@ public interface TxService {
 
     void someServiceMethod();
 
+    void txMethod();
+
 }
