@@ -1,6 +1,6 @@
 .idea/*
 *.iml
-target/*
+**/target/*
 *.log
 .settings/
 .classpath
@@ -8,3 +8,4 @@ target/*
 .idea
 .apt_generated_tests
 .factorypath
+.vscode/
