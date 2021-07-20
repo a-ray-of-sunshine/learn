@@ -21,7 +21,16 @@ public class Utils {
 		System.out.println();
 		
 	}
-	
+
+	public static void printArray(Integer[] array){
+		int size = array.length;
+		
+		for(int i = 0; i < size; i++){
+			System.out.print(array[i] + " ");
+		}
+		System.out.println();
+	}
+
 	/**
 	 * 生成数组 数值范围 [start, end], 元素个数  count
 	 * @param start 数组的数值范围
