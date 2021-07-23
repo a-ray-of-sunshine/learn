@@ -1,4 +1,4 @@
-package com.sunshine.learn.algorithm;
+package com.sunshine.learn.algorithm.hw;
 
 import java.util.ArrayList;
 import java.util.List;
