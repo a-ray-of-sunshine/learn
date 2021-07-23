@@ -10,19 +10,14 @@ public class HJ11 {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        String line = scan.next();
-        byte[] bytes = line.getBytes();
+        long num = scan.nextLong();
 
-        int length = bytes.length;
-        byte[] res = new byte[length];
-        int index = length - 1;
-        while (index >= 0) {
-            res[index] = bytes[length - index - 1];
-            index--;
+        char ch;
+        while (num != 0) {
+            ch = (char) (num % 10 + '0');
+            System.out.print(ch);
+            num /= 10;
         }
-
-        String result = new String(res);
-        System.out.println(result);
 
         scan.close();
 
