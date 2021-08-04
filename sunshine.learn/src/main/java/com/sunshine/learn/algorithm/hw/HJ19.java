@@ -32,6 +32,10 @@ public class HJ19 {
 
             String[] tokens = line[0].split("\\\\");
             String fileName = tokens[tokens.length - 1];
+            int length = fileName.length();
+            if (length > 16) {
+                fileName = fileName.substring(length - 16, length);
+            }
 
             LogInfo log = findLog(result, fileName, lineNum);
             if (log != null) {
