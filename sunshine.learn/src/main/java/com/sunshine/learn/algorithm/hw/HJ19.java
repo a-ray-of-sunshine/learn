@@ -66,7 +66,7 @@ public class HJ19 {
             if (logInfo == null) {
                 continue;
             }
-            if (logInfo.getFileName() == fileName && logInfo.getLineNum() == lineNum) {
+            if (logInfo.getFileName().equals(fileName) && lineNum.equals(logInfo.getLineNum())) {
                 return logInfo;
             }
         }
