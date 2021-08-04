@@ -55,10 +55,16 @@ public class HJ19 {
         }
 
         for (int i = tail; i < LINE_NUM; i++) {
-            System.out.println(result[i]);
+            LogInfo x = result[i];
+            if(x != null){
+                System.out.println(x);
+            }
         }
         for (int i = 0; i < tail; i++) {
-            System.out.println(result[i]);
+            LogInfo x = result[i];
+            if(x != null){
+                System.out.println(x);
+            }
         }
 
         scan.close();
